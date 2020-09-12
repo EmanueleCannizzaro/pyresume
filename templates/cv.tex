@@ -1,0 +1,309 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+% Awesome CV LaTeX Template for CV/Resume
+%
+% This template has been downloaded from:
+% https://github.com/posquit0/Awesome-CV
+%
+% Author:
+% Claud D. Park <posquit0.bj@gmail.com>
+% http://www.posquit0.com
+%
+% Template license:
+% CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
+%
+
+
+%------------------------------------------------------------------------------%
+% CONFIGURATIONS                                                               %
+%------------------------------------------------------------------------------%
+% A4 paper size by default, use 'letterpaper' for US letter
+\documentclass[10pt, letterpaper]{awesome-cv}
+
+% Configure page margins with geometry
+\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
+
+% Specify the location of the included fonts
+\fontdir[fonts/]
+
+% Color for highlights
+% Awesome Colors: awesome-emerald, awesome-skyblue, awesome-red, awesome-pink, awesome-orange
+%                 awesome-nephritis, awesome-concrete, awesome-darknight
+\colorlet{awesome}{awesome-red}
+% Uncomment if you would like to specify your own color
+%\definecolor{awesome}{HTML}{002469}
+
+% Colors for text
+% Uncomment if you would like to specify your own color
+% \definecolor{darktext}{HTML}{414141}
+% \definecolor{text}{HTML}{333333}
+%\definecolor{graytext}{HTML}{5e6062}
+% \definecolor{lighttext}{HTML}{999999}
+
+% Set false if you don't want to highlight section with awesome color
+\setbool{acvSectionColorHighlight}{true}
+
+% If you would like to change the social information separator from a pipe (|) to something else
+\renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
+
+
+%------------------------------------------------------------------------------%
+%	PERSONAL INFORMATION                                                         %
+%	Comment any of the lines below if they are not required                      %
+%------------------------------------------------------------------------------%
+% Available options: circle|rectangle,edge/noedge,left/right
+% \photo{./examples/profile.png}
+\name{(((data.preamble.name.first)))}{(((data.preamble.name.last)))}
+\position{((( data.preamble.current.role )))}
+\address{(((data.preamble.address.street))), (((data.preamble.address.city))), (((data.preamble.address.country)))}
+
+\email{(((data.preamble.contact.mail)))}
+\homepage{(((data.preamble.contact.webpage)))}
+\github{(((data.preamble.contact.github)))}
+\gitlab{(((data.preamble.contact.gitlab)))}
+\googlescholar{(((data.preamble.contact.googlescholar.id)))}{(((data.preamble.contact.googlescholar.name)))}
+% \linkedin{linkedin-name}
+% \stackoverflow{SO-id}{SO-name}
+% \twitter{twitter-name}
+% \skype{skype-id}
+% \reddit{reddit-id}
+% \extrainfo{extra informations}
+
+%\quote{``Be the change that you want to see in the world."}
+
+
+%-------------------------------------------------------------------------------
+\begin{document}
+
+% Print the header with above personal informations
+% Give optional argument to change alignment(C: center, L: left, R: right)
+\makecvheader
+
+% Print the footer with 3 arguments(<left>, <center>, <right>)
+% Leave any of these blank if they are not needed
+\makecvfooter
+  {\today}
+  {(((data.preamble.name.first))) (((data.preamble.name.last)))~~~·~~~Curriculum Vitae}
+  {\thepage}
+
+
+%-------------------------------------------------------------------------------%
+%-------------------------------------------------------------------------------%
+%	                                CV Content                                    %
+%-------------------------------------------------------------------------------%
+%-------------------------------------------------------------------------------%
+
+%-------------------------------------------------------------------------------%
+%	                                Education                                     %
+%-------------------------------------------------------------------------------%
+((* set sect = data.sections | select_by_attr_name("title", "Education") *))
+\cvsection{(((sect.title)))}
+\begin{cventries}
+((* for i in sect.entries *))
+\cventry
+  {(((i.degree | escape_tex )))}
+  {(((i.school | escape_tex )))}
+  {(((i.location | escape_tex )))}
+  {((( i.dates | date_range_filter | escape_tex )))}
+  {((* if i.entries *))
+    \begin{cvitems}
+    ((* for j in i.entries -*))
+    \item ((( j | escape_tex )))
+    ((*- endfor *))
+    \end{cvitems}
+    ((* endif *))}
+((* endfor *))
+\end{cventries}
+
+%-------------------------------------------------------------------------------%
+%	                                Experience                                    %
+%-------------------------------------------------------------------------------%
+((* set sect = data.sections | select_by_attr_name("title", "Experience") *))
+\cvsection{(((sect.title)))}
+\begin{cventries}
+((* for i in sect.entries *))
+\cventry
+  {(((i.institution | escape_tex)))}
+  {(((i.title | escape_tex)))}
+  {(((i.location | escape_tex)))}
+  {((( i.dates | date_range_filter | escape_tex )))}
+  {(((i.description | escape_tex)))}
+((* endfor *))
+\end{cventries}
+
+%-------------------------------------------------------------------------------%
+%	                                Publications                                  %
+%-------------------------------------------------------------------------------%
+((* set  sect = data.sections | select_by_attr_name("title", "Papers") *))
+\cvsection{((( sect.title )))}
+
+A current publication list is also available from 
+\href{https://orcid.org/((( data.preamble.contact.orcid )))}
+     {Orcid (ID: ((( data.preamble.contact.orcid ))))}.
+((* for i in sect.entries *))
+\cvsubsection{((( i.title | escape_tex )))}
+\begin{cvhonors}
+  ((* for j in i.entries *))
+  \cvhonor
+    {((( j.title | escape_tex )))}
+    {((( j.authors | author_filter(True) ))),
+     {\slshape\color{awesome} ((( j.journal | escape_tex )))}((* if j.doi or j.bibcode or j.url -*)), ((*-  endif *))
+     ((* if j.doi -*))
+     {\slshape\color{graytext} doi: ((( j.doi | doi_to_url(j.doi, j.bibcode, 'tex') )))}
+     ((*- elif j.bibcode -*))
+     {\slshape\color{graytext} bibcode: ((( j.bibcode | doi_to_url(j.doi, j.bibcode, 'tex') )))}
+     ((*- elif j.url -*))
+     {\slshape\color{graytext} url: \href{((( j.url.link )))}{((( j.url.name )))}}((*- endif *))}
+    {}
+    {((( j.year )))}
+  ((* endfor *))
+\end{cvhonors}
+((* endfor *))
+
+%-------------------------------------------------------------------------------%
+%	                                Fellowships                                   %
+%-------------------------------------------------------------------------------%
+((* set sect = data.sections | select_by_attr_name("title", "Research Fellowships Awarded") *))
+\cvsection{((( sect.title | escape_tex )))}
+\begin{cventries}
+((* for i in sect.entries *))
+\cventry
+  {((( i.institution | escape_tex )))}
+  {((( i.title | escape_tex )))}
+  {((( i.location )))}
+  {((( i.dates | date_range_filter | escape_tex )))}
+  {((( i.description | escape_tex )))}
+((* endfor *))
+\end{cventries}
+
+%-------------------------------------------------------------------------------%
+%	                                Service                                       %
+%-------------------------------------------------------------------------------%
+((* set sect = data.sections | select_by_attr_name("title", "Professional Service") *))
+\cvsection{((( sect.title | escape_tex )))}
+
+\textbf{Reviewer for:} ((( sect.reviewer_for | join(',') )))
+
+\begin{cventries}
+((* for i in sect.entries *))
+\cventry
+  {((( i.role )))}
+  {((( i.event )))}
+  {}
+  {((( i.dates | date_range_filter | escape_tex )))}
+  {((( i.description )))}
+((* endfor *))
+\end{cventries}
+
+%-------------------------------------------------------------------------------%
+%	                                Presentations                                 %
+%-------------------------------------------------------------------------------%
+((* set sect = data.sections | select_by_attr_name("title", "Presentations") *))
+\cvsection{((( sect.title | escape_tex )))}
+((* for i in sect.entries *))
+\cvsubsection{((( i.title | escape_tex )))}
+\begin{cventries}
+((* for j in i.entries *))
+\cventry
+  {((( j.institution | escape_tex )))}
+  {((( j.event | escape_tex )))}
+  {((( j.location | escape_tex )))}
+  {((( j.dates | date_range_filter | escape_tex )))}
+  {((( j.title | escape_tex | doi_to_url(j.doi, j.bibcode, "tex"))))}
+((* endfor *))
+\end{cventries}
+((* endfor *))
+
+%-------------------------------------------------------------------------------%
+%	                                Honors and Awards                             %
+%-------------------------------------------------------------------------------%
+((* set sect = data.sections | select_by_attr_name("title", "Honors and Awards") *))
+\cvsection{((( sect.title | escape_tex )))}
+\begin{cvhonors}
+((* for i in sect.entries *))
+\cvhonor
+  {((( i.name )))}
+  {((( i.awarder )))}
+  {}
+  {((( i.dates | date_range_filter("abbreviated") | escape_tex )))}
+((* endfor *))
+\end{cvhonors}
+
+%-------------------------------------------------------------------------------%
+%	                                Software and Computing                        %
+%-------------------------------------------------------------------------------%
+((* set sect = data.sections | select_by_attr_name("title", "Software and Computing") *))
+\cvsection{((( sect.title | escape_tex )))}
+%--- Skills ---%
+((* set sect1 = sect.entries | select_by_attr_name("title", "Skills") *))
+\cvsubsection{((( sect1.title | escape_tex )))}
+\begin{cvskills}
+((* for i in sect1.entries *))
+\cvskill{((( i.name | escape_tex )))}{((( i.value | escape_tex )))}
+((* endfor *))
+\end{cvskills}
+%--- Open Source ---%
+((* set sect2 = sect.entries | select_by_attr_name("title", "Open Source Contributions") *))
+\cvsubsection{((( sect2.title | escape_tex )))}
+
+A more complete record of my contributions is available on 
+\href{https://github.com/((( data.preamble.contact.github )))}
+     {GitHub}.
+\begin{cventries}
+((* for i in sect2.entries *))
+\cventry
+  {((( i.role | escape_tex )))}
+  {((( i.name | escape_tex )))}
+  {((( i.dates | date_range_filter | escape_tex )))}
+  {\href{https://github.com/((( i.repo )))}{github.com/((( i.repo )))}}
+  {((( i.description )))}
+((* endfor *))
+\end{cventries}
+
+%-------------------------------------------------------------------------------%
+%	                                Teaching and Mentoring                        %
+%-------------------------------------------------------------------------------%
+\cvsection{Teaching and Mentoring}
+%----------------- Students -----------------%
+((* set sect = data.sections | select_by_attr_name("title", "Students Mentored") *))
+\cvsubsection{((( sect.title | escape_tex )))}
+\begin{cventries}
+((* for i in sect.entries *))
+\cventry
+  {((( i.role | escape_tex )))}
+  {((( i.name | escape_tex )))}
+  {((( i.institution | escape_tex )))}
+  {((( i.dates | date_range_filter | escape_tex )))}
+  {((( i.description | escape_tex )))}
+((* endfor *))
+\end{cventries}
+%----------------- Courses -----------------%
+((* set sect = data.sections | select_by_attr_name("title", "Teaching Experience") *))
+\cvsubsection{((( sect.title | escape_tex )))}
+\begin{cventries}
+((* for i in sect.entries *))
+\cventry
+  {((( i.title | escape_tex )))}
+  {((( i.class | escape_tex )))}
+  {((( i.institution | escape_tex )))}
+  {((( i.dates | date_range_filter | escape_tex )))}
+  {((( i.description | escape_tex )))}
+((* endfor *))
+\end{cventries}
+
+%-------------------------------------------------------------------------------%
+%	                                Memberships                                   %
+%-------------------------------------------------------------------------------%
+((* set sect = data.sections | select_by_attr_name("title", "Memberships") *))
+\cvsection{((( sect.title | escape_tex )))}
+\begin{cventries}
+\begin{cvitems}
+  ((* for i in sect.entries *))
+  \item{((( i )))}
+  ((* endfor *))
+\end{cvitems}
+\vspace{1em}
+\end{cventries}
+
+%-------------------------------------------------------------------------------
+\end{document}

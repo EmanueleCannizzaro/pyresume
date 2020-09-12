@@ -1,0 +1,186 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+% Awesome CV LaTeX Template for CV/Resume
+%
+% This template has been downloaded from:
+% https://github.com/posquit0/Awesome-CV
+%
+% Author:
+% Claud D. Park <posquit0.bj@gmail.com>
+% http://www.posquit0.com
+%
+% Template license:
+% CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
+%
+
+
+%------------------------------------------------------------------------------%
+% CONFIGURATIONS                                                               %
+%------------------------------------------------------------------------------%
+% A4 paper size by default, use 'letterpaper' for US letter
+\documentclass[10pt, letterpaper]{awesome-cv}
+
+% Configure page margins with geometry
+\geometry{left=0.3cm, top=0.5cm, right=0.3cm, bottom=0.5cm, footskip=0cm}
+
+% Specify the location of the included fonts
+\fontdir[fonts/]
+
+% Color for highlights
+% Awesome Colors: awesome-emerald, awesome-skyblue, awesome-red, awesome-pink, awesome-orange
+%                 awesome-nephritis, awesome-concrete, awesome-darknight
+\colorlet{awesome}{awesome-red}
+% Uncomment if you would like to specify your own color
+%\definecolor{awesome}{HTML}{002469}
+
+% Colors for text
+% Uncomment if you would like to specify your own color
+% \definecolor{darktext}{HTML}{414141}
+% \definecolor{text}{HTML}{333333}
+%\definecolor{graytext}{HTML}{5e6062}
+% \definecolor{lighttext}{HTML}{999999}
+
+% Set false if you don't want to highlight section with awesome color
+\setbool{acvSectionColorHighlight}{true}
+
+% If you would like to change the social information separator from a pipe (|) to something else
+\renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
+
+
+%------------------------------------------------------------------------------%
+%	PERSONAL INFORMATION                                                         %
+%	Comment any of the lines below if they are not required                      %
+%------------------------------------------------------------------------------%
+% Available options: circle|rectangle,edge/noedge,left/right
+% \photo{./examples/profile.png}
+\name{(((data.preamble.name.first)))}{(((data.preamble.name.last)))}
+\position{((( data.preamble.current.role )))}
+\address{(((data.preamble.address.street))), (((data.preamble.address.city))), (((data.preamble.address.country)))}
+
+\email{(((data.preamble.contact.mail)))}
+\homepage{(((data.preamble.contact.webpage)))}
+\github{(((data.preamble.contact.github)))}
+\gitlab{(((data.preamble.contact.gitlab)))}
+\googlescholar{(((data.preamble.contact.googlescholar.id)))}{(((data.preamble.contact.googlescholar.name)))}
+% \linkedin{linkedin-name}
+% \stackoverflow{SO-id}{SO-name}
+% \twitter{twitter-name}
+% \skype{skype-id}
+% \reddit{reddit-id}
+% \extrainfo{extra informations}
+
+%\quote{``Be the change that you want to see in the world."}
+
+
+%-------------------------------------------------------------------------------
+\begin{document}
+
+% Print the header with above personal informations
+% Give optional argument to change alignment(C: center, L: left, R: right)
+\makecvheader
+
+% Print the footer with 3 arguments(<left>, <center>, <right>)
+% Leave any of these blank if they are not needed
+\makecvfooter
+  {}
+  {}
+  {}
+
+
+%-------------------------------------------------------------------------------%
+%-------------------------------------------------------------------------------%
+%	                                CV Content                                    %
+%-------------------------------------------------------------------------------%
+%-------------------------------------------------------------------------------%
+
+%-------------------------------------------------------------------------------%
+%	                                Education                                     %
+%-------------------------------------------------------------------------------%
+((* set sect = data.sections | select_by_attr_name("title", "Education") *))
+\cvsection{(((sect.title)))}
+\begin{cvhonors}
+((* for i in sect.entries *))
+\cvhonor{((( i.school | escape_tex )))}{((( i.degree | escape_tex )))}{((( i.location | escape_tex )))}{((( i.dates.end )))}
+((* endfor *))
+\end{cvhonors}
+
+%-------------------------------------------------------------------------------%
+%	                                Experience                                    %
+%-------------------------------------------------------------------------------%
+((* set sect = data.sections | select_by_attr_name("title", "Experience") *))
+\cvsection{(((sect.title)))}
+\begin{cvhonors}
+((* for i in sect.entries *))
+\cvhonor
+  {(((i.title | escape_tex)))}
+  {(((i.institution | escape_tex)))}
+  {(((i.location | escape_tex)))}
+  {(((i.dates | date_range_filter("numerical_short_year",True) )))}
+((* endfor *))
+\end{cvhonors}
+
+%-------------------------------------------------------------------------------%
+%	                                Publications                                  %
+%-------------------------------------------------------------------------------%
+((* set  sect = data.sections | select_by_attr_name("title", "Papers") *))
+((* set sect_pubs = sect.entries | select_by_attr_name("title", "Refereed Publications") *))
+\cvsection{((( sect.title )))}
+
+A current publication list is also available from 
+\href{https://orcid.org/((( data.preamble.contact.orcid )))}
+     {Orcid (ID: ((( data.preamble.contact.orcid ))))}.
+\begin{cvhonors}
+  ((* for j in sect_pubs.entries *))
+  \cvhonor
+    {((( j.title | escape_tex )))}
+    {((( j.authors | author_filter(True) ))),
+     {\slshape\color{awesome} ((( j.journal | escape_tex )))}((* if j.doi or j.bibcode or j.url -*)), ((*-  endif *))
+     ((* if j.doi -*))
+     {\slshape\color{graytext} doi: ((( j.doi | doi_to_url(j.doi, j.bibcode, 'tex') )))}
+     ((*- elif j.bibcode -*))
+     {\slshape\color{graytext} bibcode: ((( j.bibcode | doi_to_url(j.doi, j.bibcode, 'tex') )))}
+     ((*- elif j.url -*))
+     {\slshape\color{graytext} url: \href{((( j.url.link )))}{((( j.url.name )))}}((*- endif *))}
+    {}
+    {((( j.year )))}
+  ((* endfor *))
+\end{cvhonors}
+
+%-------------------------------------------------------------------------------%
+%	                                Presentations                                 %
+%-------------------------------------------------------------------------------%
+((* set sect = data.sections | select_by_attr_name("title", "Presentations") *))
+((* set sect_conf = sect.entries | select_by_attr_name("title", "Conference Talks") *))
+
+\cvsection{Selected Presentations}
+
+\begin{cvhonors}
+((* for j in sect_conf.entries *))
+((* if j.selected *))
+\cvhonor
+  {((( j.event | escape_tex )))}
+  {((( j.title | escape_tex | doi_to_url(j.doi, j.bibcode, "tex"))))}
+  {((( j.location | escape_tex )))}
+  {((( j.dates.start.month )))/((( j.dates.start.year )))}
+((* endif *))
+((* endfor *))
+\end{cvhonors}
+
+%-------------------------------------------------------------------------------%
+%	                                Honors and Awards                             %
+%-------------------------------------------------------------------------------%
+((* set sect = data.sections | select_by_attr_name("title", "Honors and Awards") *))
+\cvsection{((( sect.title | escape_tex )))}
+\begin{cvhonors}
+((* for i in sect.entries *))
+\cvhonor
+  {((( i.name )))}
+  {((( i.awarder )))}
+  {}
+  {((( i.dates | date_range_filter("numerical",False) )))}
+((* endfor *))
+\end{cvhonors}
+
+
+%-------------------------------------------------------------------------------
+\end{document}

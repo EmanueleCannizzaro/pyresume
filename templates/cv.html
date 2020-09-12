@@ -1,0 +1,53 @@
+<!-------------------------------------------------------------------------------------------->
+<!--                                          Education                                     -->
+<!-------------------------------------------------------------------------------------------->
+{% set sect = data.sections | select_by_attr_name("title","Education") %}
+<h2>{{ sect.title }}</h2>
+<ul>
+{% for i in sect.entries %}
+<li class="list-unstyled lead"><strong>{{ i.school }}</strong> {{ i.location }}<span class="pull-right">{{i.degree}}, <em>{{ i.dates | date_range_filter }}</em></span></li>
+{% endfor %}
+</ul>
+<!-------------------------------------------------------------------------------------------->
+<!--                                          Software and Computing                        -->
+<!-------------------------------------------------------------------------------------------->
+{% set  sect = data.sections | select_by_attr_name("title", "Software and Computing Skills") %}
+<h2>{{ sect.title }}</h2>
+<ul>
+{% for i in sect.entries %}
+<li class="list-unstyled lead"><strong>{{ i.name }}</strong> {{ i.value }}</li>
+{% endfor %}
+</ul>
+<!-------------------------------------------------------------------------------------------->
+<!--                                          Publications                                  -->
+<!-------------------------------------------------------------------------------------------->
+{% set  sect = data.sections | select_by_attr_name("title", "Papers") %}
+<h2>{{ sect.title }}</h2>
+{% for i in sect.entries %}
+<h3>{{ i.title }}</h3>
+<ul>
+{% for j in i.entries %}
+<li class="lead"><em>{{ j.title }}</em><br>{{ j.authors | author_filter }}, {{ j.journal }} {{ j.year }}</li>
+{% endfor %}
+</ul>
+{% endfor %}
+<!-------------------------------------------------------------------------------------------->
+<!--                                          Presentations                                 -->
+<!-------------------------------------------------------------------------------------------->
+{% set sect = data.sections | select_by_attr_name("title", "Presentations") %}
+<h2>{{ sect.title }}</h2>
+{% for i in sect.entries%}
+<h3>{{ i.title }}</h3>
+<ul>
+{% for j in i.entries %}
+<li class="lead"><em>{{ j.title }}</em> <span class="pull-right">{{ j.event }}</span><br>{{ j.dates | date_range_filter }}, {{ j.location }}</li>
+{% endfor %}
+</ul>
+{% endfor %}
+
+<!-------------------------------------------------------------------------------------------->
+{% if pdf_link %}
+<div class="lead text-center">
+A complete version of my CV can be found <a href="{{ pdf_link }}">here</a>
+</div>
+{% endif %}
