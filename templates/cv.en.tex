@@ -1,0 +1,282 @@
+\documentclass[withoutsidebar, hidelinks]{simplehipstercv}
+% available options are: darkhipster, lighthipster, pastel, allblack, grey, verylight, withoutsidebar
+% withoutsidebar
+
+\usepackage[utf8]{inputenc}
+\usepackage[default]{raleway}
+\usepackage[margin=1cm, top=1.5cm, bottom=1.5cm, a4paper]{geometry}
+
+\usepackage{hyperref}
+
+\usepackage{tabularx}
+\usepackage{xcolor}
+
+% For justification
+\usepackage{ragged2e}
+
+%------------------------------------------------------------------ Variables
+
+\newlength{\rightcolwidth}
+\newlength{\leftcolwidth}
+\setlength{\leftcolwidth}{0.27\textwidth}
+\setlength{\rightcolwidth}{0.78\textwidth}
+
+%------------------------------------------------------------------
+\title{Curriculum vitae}
+\author{Guillaume de Susanne d'Epinay}
+\date{\today}
+
+\pagestyle{empty}
+
+
+%----------------------------------------------------------------------------------------
+% 	TIMELINE CHART
+%----------------------------------------------------------------------------------------
+
+
+%defineColors
+\definecolor{orange}{RGB}{255,150,0}
+\definecolor{lblue}{RGB}{0,178,255}
+\definecolor{darkblue}{RGB}{0,80,130}
+\definecolor{darkerblue}{RGB}{0,100,160}
+\definecolor{lgray}{RGB}{0,120,200}
+\definecolor{powderblue}{RGB}{190,220,255}
+\definecolor{darkestblue}{RGB}{0,50,80}
+\definecolor{bgcol}{HTML}{ffffff}
+
+
+%main color
+\colorlet{maincol}{orange}
+
+%secondary colors
+\colorlet{secondcol}{lblue}
+\colorlet{thirdcol}{darkblue}
+\colorlet{fourthcol}{darkerblue}
+\colorlet{fifthcol}{lgray}
+\colorlet{sixthcol}{darkblue}
+
+%background color
+
+%textcolor
+\colorlet{textcol}{darkestblue}
+
+%titletextcolor
+\colorlet{titletext}{white}
+
+%sectioncolor
+\colorlet{sectcol}{white}
+
+\pagecolor{bgcol}
+
+
+\input{timeline.tex}
+
+\begin{document}
+
+
+\thispagestyle{empty}
+%-------------------------------------------------------------
+
+\section*{Start}
+
+\simpleheader{headercolour}{Guillaume}{de Susanne d'Epinay}{University \textit{of} Glasgow undergraduate student}{white}
+
+
+
+%------------------------------------------------
+
+% this has to be here so the paracols starts..
+\subsection*{}
+\vspace{4em}
+
+\setlength{\columnsep}{1cm}
+\columnratio{0.27}[0.78]
+\begin{paracol}{2}
+  \hbadness5000
+  % cream yellow for column-1 %\backgroundcolor{g}[rgb]{0.8,1,1} % \backgroundcolor{l}[rgb]{0,0,0.7} % dark blue for left margin
+
+  \paracolbackgroundoptions
+
+  % 0.9,0.9,0.9 -- 0.8,0.8,0.8
+
+
+  \footnotesize
+  {\setasidefontcolour
+    \flushright
+
+    \bg{cvgreen}{white}{About me}\\[0.5em]
+
+
+    \justifying
+    Hello, I am a Politics and Computing Science student in Glasgow, particularly interested in the intersection and interactions between Technology and Politics. I will graduate in Summer of 2020 and will be \textbf{available in September 2020}.
+
+    \flushright
+
+    \bigskip
+
+    \bg{cvgreen}{white}{IT Skills} \\[0.5em]
+
+    Flask •
+    Django •
+    OpenAPI •
+    Machine Learning (Sklearn) •
+    Docker •
+    CI/CD (Gitlab, Jenkins, Dockerhub) •
+    Arch Linux •
+    Ubuntu •
+    PfSense •
+    MongoDB •
+    ReactJS •
+    BASH scripting
+
+    \bigskip
+
+    \bg{cvgreen}{white}{Political Science studies} \\[0.5em]
+
+    Chinese Politics •
+    Energy Politics •
+    European Politics •
+    Geopolitics •
+    China's International Relations
+
+
+    \bigskip
+
+    \bg{cvgreen}{white}{Programming} \\[0.5em]
+
+    \begin{tabularx}{\leftcolwidth}{ll}
+      \bg{skilllabelcolour}{iconcolour}{Python}     & \barrule{0.35\leftcolwidth}{0.5em}{cvpurple} \\
+      \bg{skilllabelcolour}{iconcolour}{HTML, CSS}  & \barrule{0.2\leftcolwidth}{0.5em}{cvpurple}  \\
+      \bg{skilllabelcolour}{iconcolour}{\LaTeX}     & \barrule{0.3\leftcolwidth}{0.5em}{cvpurple}  \\
+      \bg{skilllabelcolour}{iconcolour}{javascript} & \barrule{0.2\leftcolwidth}{0.5em}{cvpurple}  \\
+      \bg{skilllabelcolour}{iconcolour}{C}          & \barrule{0.1\leftcolwidth}{0.5em}{cvpurple}  \\
+      \bg{skilllabelcolour}{iconcolour}{C++}        & \barrule{0.05\leftcolwidth}{0.5em}{cvpurple} \\
+      \bg{skilllabelcolour}{iconcolour}{Java}       & \barrule{0.05\leftcolwidth}{0.5em}{cvpurple} \\
+      \bg{skilllabelcolour}{iconcolour}{Go}         & \barrule{0.05\leftcolwidth}{0.5em}{cvpurple} \\
+      \bg{skilllabelcolour}{iconcolour}{Erlang}     & \barrule{0.05\leftcolwidth}{0.5em}{cvpurple} \\
+    \end{tabularx}
+
+    \bigskip
+
+    \bg{cvgreen}{white}{Languages} \\[0.5em]
+    \begin{tabularx}{\leftcolwidth}{l | X}
+      \textbf{French}  & {\phantom{x}\footnotesize Native language}                \\
+      \textbf{English} & {\phantom{x}\footnotesize bilingual}                      \\
+      \textbf{Spanish} & \pictofraction{\faCircle}{cvgreen}{1}{black!30}{3}{\tiny}
+    \end{tabularx}
+
+    \bigskip
+
+    \bg{cvgreen}{white}{Diplomas}\\[0.5em]
+
+    \href{http://cloud.desusanne.com/s/KPk932aDszTDbf7}{\textbf{BNSSA}, French lifeguard diploma}
+
+    \href{http://cloud.desusanne.com/s/3YnCAdcy8Em7Mt4}{\textbf{PSE1}, French first aid diploma}
+
+    French \textbf{driver's license}
+
+    \href{http://cloud.desusanne.com/s/iEsrP67iGY9YrbP}{\textbf{Scientific Baccalauréat}, OIB}
+
+    \bigskip
+
+    \bg{cvgreen}{white}{Sports}\\[0.5em]
+    \begin{tabularx}{\leftcolwidth}{l | X}
+      \href{https://abcnatation.fr/club_manager/clubs/nageur_perfs/030632450/1488466}{\textbf{Swimming}} & 10 Years \\
+
+      \textbf{Biking}                                                                                    & 6 Years  \\
+
+      \textbf{Running}                                                                                   & 4 Years  \\
+    \end{tabularx}
+    \vspace{3em}
+
+
+    \href{https://guillaume.desusanne.com}{\infobubble{\faUser}{cvgreen}{white}{guillaume.desusanne.com}}
+
+    \href{https://blog.guillaume.desusanne.com}{\infobubble{\faPencil}{cvgreen}{white}{blog.guillaume.desusanne.com}}
+
+    \href{https://github.com/guillaumedsde}{\infobubble{\faGithub}{cvgreen}{white}{github.com/guillaumedsde}}
+
+    \href{https://gitlab.com/guillaumedsde}{\infobubble{\faGitlab}{cvgreen}{white}{gitlab.com/guillaumedsde}}
+
+
+    \phantom{turn the page}
+
+    \phantom{turn the page}
+  }
+  %-----------------------------------------------------------
+  \switchcolumn
+
+  \hspace{250pt}
+  \mbox{
+    \legend{Experience}{1.8cm}{cvgreen}
+    \legend{Education}{1.5cm}{cvpurple}
+  }
+  \vspace{-20pt}
+
+  % TIMELINE
+  \begin{cvtimeline}{2013}{2021}{11}
+    \linevent{6/2019}{8/2019}{Intern}{\href{https://www.misakey.com/}{Misakey, Lyon}}{Python Website metada crawler as Docker microservices backed by MongoDB}{cvgreen}{June to August 2019}
+
+    \linevent{6/2018}{7/2018}{Summer job}{\href{https://www.cgi.fr/fr-fr/recrute/clermont-ferrand}{CGI, Clermont-Ferrand}}{Python program to formulate Gitlab access levels in Terraform Azure IAM policies}{cvgreen}{June and July 2018}
+
+    \linevent{6/2017}{8/2017}{Lifeguard}{Cournon d'Auvergne, France}{Team supervision of the safety and rescue of swimmers in lake of Cournon d'Auvergne}{cvgreen}{August 2017}
+
+    \linevent{9/2016}{7/2020}{Master of Arts in Computing Science and Politics}{University \textit{of} Glasgow}{European, Chinese and Energy Politics, Machine Learning, Programming and Networks}{cvpurple}{July 2020}
+
+    \linevent{8/2016}{10/2016}{Lifeguard}{Aydat, France}{}{cvgreen}{August 2016}
+
+    \linevent{9/2013}{2/2016}{\href{http://cloud.desusanne.com/s/iEsrP67iGY9YrbP}{Scientific Baccalauréat, British OIB}}{Lycée Jeanne d'Arc, Clermont-Ferrand}{First class honours French scientific high school diploma with international english}{cvpurple}{July 2016}
+
+    \linevent{9/2010}{7/2014}{Agricultural summer jobs}{Auvergne, France}{Worked for a couple weeks during multiple summers harvesting cherries}{cvgreen}{summers of 2012-2015}
+
+    \linevent{9/2010}{7/2013}{Brevet mention internationale}{Collège Jeanne d'Arc, Clermont-Ferrand}{Second Class honours French middle school diploma with international english}{cvpurple}{July 2013}
+
+  \end{cvtimeline}
+
+  \section*{Projects}
+  \href{https://harpocrates-app.gitlab.io/harpocrates/}{
+    \begin{minipage}[t]{0.45\rightcolwidth}
+      \subsubsection*{Sensitive Document Classification}
+      My final year project is a \textbf{ReactJS} + \textbf{Flask} Web Application for redacting sensitive government documents with \textbf{SkLearn} Machine Learning (ML) classification of \textbf{MongoDB} documents by sensitivity along with feature explanations for the ML classification.
+    \end{minipage}}
+  \hspace{0.5em}
+  \href{https://gitlab.com/guillaumedsde/docker-media-stack}{
+    \begin{minipage}[t]{0.45\rightcolwidth}
+      \subsubsection*{Personal server}
+      Home racked \textbf{ZFS} media storage and application server built with docker requiring minimal configuration and automatic SSL \textbf{Traefik} reverse proxy serving various applications authenticated using \textbf{OAuth2}.
+    \end{minipage}
+  }
+  \begin{minipage}[t]{0.45\rightcolwidth}
+    \vspace{1em}
+    \subsubsection*{Web crawler}
+    At Misakey, I built a broad web crawler with \textbf{Scrapy} as multiple Python microservices backed by \textbf{MongoDB} for extracting website metadata and constructing a large database of website information.
+  \end{minipage}
+
+
+  \vfill{} % Whitespace before final footer
+
+  %----------------------------------------------------------------------------------------
+  %	FINAL FOOTER
+  %----------------------------------------------------------------------------------------
+  \setlength{\parindent}{0pt}
+  \begin{minipage}[t]{0.9\rightcolwidth}
+    \begin{center}\fontfamily{\sfdefault}\selectfont \color{black!70}
+      {
+        \small Guillaume de Susanne d'Epinay
+
+        \href{geo:45.6214539,3.0495612}{\icon{\faEnvelopeO}{cvgreen}{} Chemin de la roche du Grelet, 63450 Olloix}
+
+        \icon{\faMapMarker}{cvgreen}{} France
+
+
+        \href{tel:+33 6 41 80 00 60}{\icon{\faPhone}{cvgreen}{} \textbf{+33 6 41 80 00 60}}
+
+        \href{mailto:guillaume@desusanne.com}{\icon{\faAt}{cvgreen}{} \textbf{guillaume@desusanne.com}}
+
+      }
+    \end{center}
+  \end{minipage}
+
+\end{paracol}
+
+\end{document}

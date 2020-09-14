@@ -1,0 +1,124 @@
+%-----------------------------------------------------------------------------------------------------------------------------------------------%
+%	The MIT License (MIT)
+%
+%	Copyright (c) 2016 Jan Küster
+%
+%	Permission is hereby granted, free of charge, to any person obtaining a copy
+%	of this software and associated documentation files (the "Software"), to deal
+%	in the Software without restriction, including without limitation the rights
+%	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+%	copies of the Software, and to permit persons to whom the Software is
+%	furnished to do so, subject to the following conditions:
+%	
+%	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+%	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+%	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+%	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+%	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+%	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+%	THE SOFTWARE.
+%
+%-----------------------------------------------------------------------------------------------------------------------------------------------%
+
+
+%----------------------------------------------------------------------------------------
+% STRUTS AND RULES
+%----------------------------------------- -----------------------------------------------
+
+% custom strut
+\newcommand{\mystrut}{\rule[-.3\baselineskip]{0pt}{\baselineskip}}
+
+% colored rule and text for chart legends, wrapped in parbox
+% param 1: text
+% param 2: width in cm or pt, em ...
+% param 3: color
+\newcommand{\legend}[3]{\parbox[t]{#2}{\textcolor{#3}{\rule{#2}{4pt}}\\#1}}
+
+% define global counters
+\newcounter{yearcount}
+
+
+\newcounter{leftcount}
+
+% env cvtimeline
+%
+% creates a vertical cv timeline
+%
+% param 1: start year
+% param 2: end year
+% param 3: overall width
+\newenvironment{cvtimeline}[3]{
+
+	\newcommand{\cvcategory}[2]{
+		\node[label=\mbox{\colorbox{##1}{\strut\hspace{2pt}}\colorbox{white}{\textcolor{textcol}{##2}}}] at (0,-5) {}; %start year
+	}
+
+	\newcommand{\bxwidth}{4.5}
+	\newcommand{\bxheight}{2}
+
+
+	% creates a stretched box as cv entry headline followed by two paragraphs about 
+	% the work you did
+	% param 1:	event start month/year
+	% param 2:	event end month/year
+	% param 3:  event name
+	% param 4:	institution (where did you work / study)
+	% param 5:	what was your position
+	% param 6:	color
+	% param 7:  start date to display 
+	\newcommand{\linevent}[7] {
+
+		\foreach \monthf/\yearf in {##2} {
+				\foreach \montht/\yeart in {##1} {
+
+						\pgfmathparse{#3/\fullrange*((\yearf-#1)+(\monthf/12))}
+						\let\startexp\pgfmathresult
+						\pgfmathparse{#3/\fullrange*((\yeart-#1)+(\montht/12))}
+						\let\endexp\pgfmathresult
+						\pgfmathparse{1/(\endexp-\startexp+1)}
+						\let\lenexp\pgfmathresult
+						\pgfmathparse{0.5*\endexp+0.5*\startexp}
+						\let\midexp\pgfmathresult
+
+						\draw[draw=##6, line width=2pt] (0.07, \startexp) -- (1,\startexp);
+
+						\node[label={[align=left, label distance=2.5]0:\colorbox{##6}{\strut}\colorbox{white}{\textcolor{black}{##7}\hspace{3pt}\textcolor{##6}{##3}}\hspace{3pt}\textcolor{black}{##4} \ifthenelse{\equal{##5}{}}{}{\\ \colorbox{##6}{\strut}\colorbox{white}{\textcolor{black}{##5}}}}] at (0.5, \startexp) {};
+
+						
+					}
+				\addtocounter{leftcount}{1}
+			}
+	}
+
+	%--------------------------------------------------------------------------------------
+	%	BEGIN
+	%--------------------------------------------------------------------------------------
+
+	\begin{tikzpicture}
+
+		\setcounter{leftcount}{1}
+
+		%calc fullrange= number of years
+		\pgfmathparse{(#2-#1)}
+		\let\fullrange\pgfmathresult
+		\draw[draw=skilllabelcolour,line width=4pt] (0,0) -- (0,#3) ;	%the timeline
+
+		%for each year put a horizontal line in place
+		\setcounter{yearcount}{1}
+		\whiledo{\value{yearcount} < \fullrange}{
+			\draw[fill=white,draw=skilllabelcolour, line width=2pt]  (0,#3/\fullrange*\value{yearcount}) circle (0.1);
+			\stepcounter{yearcount}
+		}
+
+		%start year
+		\filldraw[fill=white!100,draw=skilllabelcolour,line width=3pt] (0,-0.5) circle (0.5);
+		\node[label=\textcolor{skilllabelcolour}{\textbf{\small#1}}] at (0,-0.85) {};
+
+		%end year
+		\filldraw[fill=white!100,draw=skilllabelcolour,line width=5pt] (0,#3+0.75) circle (0.75);
+		\node[label=\textcolor{skilllabelcolour}{\textbf{\large#2}}] at (0,#3+0.42) {};
+
+
+
+		}%end begin part of newenv
+		{\end{tikzpicture}}

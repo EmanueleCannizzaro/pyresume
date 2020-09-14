@@ -17,7 +17,7 @@ class BuildCV(object):
     def __init__(self, yaml_config_file, filters=None, templates=None):
         self.filters = filters
         with open(yaml_config_file, 'r') as f:
-            self.data = yaml.load(f)
+            self.data = yaml.load(f, Loader=yaml.FullLoader)
         templates = {} if templates is None else templates
         self.loader = jinja2.loaders.DictLoader(templates)
 
@@ -80,7 +80,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Build TeX and Markdown versions of your CV')
     cur_dir = os.path.dirname(os.path.realpath(__file__))
     parser.add_argument("--cv_data", help="YAML config file containing all CV data",
-                        default=os.path.join(cur_dir, 'cv_data.yml'))
+                        default=os.path.join(cur_dir, '../data/cv.yml'))
     parser.add_argument("--md_out_file", help="where to write markdown version of CV")
     parser.add_argument("--html_out_file", help="where to write HTML version of CV")
     parser.add_argument("--tex_out_file", help="where to write TeX version of CV")
